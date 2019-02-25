@@ -1,8 +1,16 @@
 const express = require("express");
+const path = require("path");
 const { syncAndSeed, Company } = require("./db");
 
 const app = express();
 
+app.get('/', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'index.html'))
+});
+
+app.get('/app.js', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'dist', 'main.js'))
+});
 
 app.get('/api/companies', (req, res, next) => {
   Company.findAll()
